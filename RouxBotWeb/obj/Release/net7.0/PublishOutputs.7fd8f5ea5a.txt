@@ -1,0 +1,13 @@
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\RouxBotWeb.exe
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\appsettings.Development.json
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\appsettings.json
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\RouxBotWeb.dll
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\RouxBotWeb.deps.json
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\RouxBotWeb.runtimeconfig.json
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\RouxBotWeb.pdb
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\BouncyCastle.Cryptography.dll
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\MailKit.dll
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\MimeKit.dll
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\System.Security.Cryptography.Pkcs.dll
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\Toolbelt.Blazor.SpeechSynthesis.dll
+C:\Users\jmlom\source\repos\RouxBotWeb\RouxBotWeb\obj\Release\net7.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll

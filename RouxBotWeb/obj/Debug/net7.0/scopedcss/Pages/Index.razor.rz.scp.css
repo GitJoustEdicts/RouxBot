@@ -1,0 +1,45 @@
+*[b-inzrd4ggac] {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.notif[b-inzrd4ggac] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:#009efb;
+}
+
+.emoji[b-inzrd4ggac] {
+    font-size: 200px;
+}
+
+.notifText[b-inzrd4ggac] {
+    font-size: 50px;
+    top: 75%;
+    left: 50%;
+}
+
+.eyes[b-inzrd4ggac] {
+    border: 0;
+    top: -22px;
+    left: -32px;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.eyes img[b-inzrd4ggac] {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

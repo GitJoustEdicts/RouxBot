@@ -1,0 +1,15 @@
+.eyes[b-inzrd4ggac] {
+    border-radius: 0.25em;
+    border: 0;
+    display: inline-block;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.eyes img[b-inzrd4ggac] {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

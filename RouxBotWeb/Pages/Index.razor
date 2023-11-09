@@ -1,0 +1,184 @@
+﻿@using Toolbelt.Blazor.SpeechSynthesis
+@inject SpeechSynthesis SpeechSynthesis
+@inject SoundService SoundService
+
+@page "/"
+<PageTitle>Index</PageTitle>
+
+@if (imageSource is not null)
+{
+    <body overflow: auto>
+        <div class="eyes" @onclick="HandleClick">
+            <img src="@imageSource" />
+        </div>
+
+        <center>
+            <div class="notif">
+                    <p role="status" class="emoji">@lastEmail.emoji</p>
+                    <p role="status" class="notifText">@lastEmail.notification</p>
+            </div>
+        </center>
+    </body>
+}
+
+@code {
+    private bool notifDisplayed = false;
+
+    private string? imageSource = "images/IdleBlink_Center_1s.gif";
+
+    private ValidEmailFormat lastEmail = new();
+
+    IEnumerable<SpeechSynthesisVoice> Voices;
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            this.Voices = await this.SpeechSynthesis.GetVoicesAsync();
+            this.StateHasChanged();
+        }
+    }
+
+    private async Task HandleClick()
+    {
+        if (notifDisplayed)
+        {
+            var utterancet = new SpeechSynthesisUtterance
+                {
+                    Text = lastEmail.readableContent,
+                    Voice = this.Voices.FirstOrDefault(v => v.Name.Contains("Paul"))
+                };
+
+            await this.SpeechSynthesis.SpeakAsync(utterancet);
+
+            lastEmail = new();
+            notifDisplayed = false;
+        }
+    }
+
+    private async Task FetchUnreadEmails()
+    {
+        while(true)
+        {
+            await Task.Delay(10000);
+            var mailRepository = new MailRepository("imap.gmail.com", 993, true, "rouxbot95@gmail.com", "kmpe wchq cdch msuv");
+            var allEmails = mailRepository.GetUnreadMails();
+            int nbEmail = 0;
+
+            foreach (var email in allEmails)
+            {
+                nbEmail++;
+                lastEmail = email;
+            }
+
+            if (lastEmail.readableContent != null)
+            {
+                notifDisplayed = true;
+                await SoundService.PlaySoundAsync("/media/bubble.wav");
+                imageSource = "images/IdleToNotif_Center_1s.gif";
+            }
+
+            Console.WriteLine("Gathered a total of {0} emails.", nbEmail);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        RunEyeAnimations();
+        FetchUnreadEmails();
+    }
+
+    private async Task RunEyeAnimations()
+    {
+        Random rnd = new Random();
+
+        while(true)
+        {
+            await Task.Delay(1000);
+            switch (imageSource)
+            {
+                case ("images/CenterHappy_1s.gif"):
+                    {
+                        int val = rnd.Next(0, 11);
+                        {
+                            if (val == 10)
+                            {
+                                imageSource = "images/HappyToIdle_Center_1s.gif";
+                            }
+                        }
+                        break;
+                    }
+                case ("images/Idle_Wander_1s.gif"):
+                case ("images/IdleBlink_Center_1s.gif"):
+                    {
+                        int val = rnd.Next(0, 4);
+                        if (val == 3)
+                        {
+                            val = rnd.Next(0, 3);
+                            if (val == 0)
+                            {
+                                imageSource = "images/Idle_Wander_1s.gif";
+                            }
+                            else if (val == 1)
+                            {
+                                imageSource = "images/IdleToHappy_Center_1s.gif";
+                            }
+                            else
+                            {
+                                imageSource = "images/IdleToSleepy_Center_1s.gif";
+                            }
+                        }
+                        else
+                        {
+                            imageSource = "images/IdleBlink_Center_1s.gif";
+                        }
+                        break;
+                    }
+                case ("images/IdleToHappy_Center_1s.gif"):
+                    {
+                        imageSource = "images/CenterHappy_1s.gif";
+                        break;
+                    }
+                case ("images/IdleToNotif_Center_1s.gif"):
+                    {
+                        imageSource = "images/Notif_Center_1s.gif";
+                        break;
+                    }
+                case ("images/IdleToSleepy_Center_1s.gif"):
+                    {
+                        imageSource = "images/Sleepy_Center_1s.gif";
+                        break;
+                    }
+                case ("images/Notif_Center_1s.gif"):
+                    {
+                        if (!notifDisplayed)
+                        {
+                            imageSource = "images/NotifToIdle_Center_1s.gif";
+                        }
+                        break;
+                    }
+                case ("images/Sleepy_Center_1s.gif"):
+                    {
+                        int val = rnd.Next(0, 11);
+                        {
+                            if (val == 10)
+                            {
+                                imageSource = "images/SleepyToIdle_Center_1s.gif";
+                            }
+                        }
+                        break;
+                    }
+                case ("images/NotifToIdle_Center_1s.gif"):
+                case ("images/SleepyToIdle_Center_1s.gif"):
+                case ("images/HappyToIdle_Center_1s.gif"):
+                default:
+                    {
+                        imageSource = "images/IdleBlink_Center_1s.gif";
+                        break;
+                    }
+            }
+
+            StateHasChanged();
+        }
+    }
+}
